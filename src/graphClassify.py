@@ -42,6 +42,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import svm
 from sklearn.tree import DecisionTreeClassifier
@@ -56,7 +57,7 @@ import sys
 logger = logging.getLogger(__name__)
 logger.setLevel(level=logging.INFO)
 file_handler = logging.FileHandler(
-    '/Users/chengxiao/Downloads/graph2vec-master/resources/result/DecisionTree_result.txt')
+    '../resources/result/NaiveBayes_result.txt.txt')
 file_handler.setLevel(level=logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
@@ -229,25 +230,17 @@ def NaiveBayes_cross_validation(train_x, train_y):
     :param train_y:
     :return:
     '''
-    clf = MultinomialNB()
-    param_grid = [{'penalty': ['l1', 'l2'],
-                   'C': [1e-3, 1e-2, 1e-1, 1, 10, 100, 1000],
-                   'solver': ['liblinear', 'saga']
-                   },
-                  {'penalty': ['l2'],
-                   'C': [1e-3, 1e-2, 1e-1, 1, 10, 100, 1000],
-                   'solver': ['lbfgs', 'newton-cg', 'sag']
-                   }]
-
-    grid_search = GridSearchCV(clf, param_grid, n_jobs=8, verbose=1, cv=5)
-    grid_search.fit(train_x, train_y)
-    best_parameters = grid_search.best_estimator_.get_params()
-    logger.info("LR best param:")
-    for para, val in list(best_parameters.items()):
-        # print(para, val)
-        logger.info(str(para) + " " + str(val))
-    clf = LogisticRegression(penalty=best_parameters['penalty'], solver=best_parameters['solver'],
-                             C=best_parameters['C'])
+    clf = GaussianNB()
+    # param_grid={'alpha':[1, 0.1, 0.01, 0.001, 0.0001]}
+    #
+    # grid_search = GridSearchCV(clf, param_grid, n_jobs=8, verbose=1, cv=5)
+    # grid_search.fit(train_x, train_y)
+    # best_parameters = grid_search.best_estimator_.get_params()
+    # logger.info("NAiveBayes best param:")
+    # for para, val in list(best_parameters.items()):
+    #     # print(para, val)
+    #     logger.info(str(para) + " " + str(val))
+    # clf = GaussianNB()
 
     return clf
 
@@ -331,7 +324,7 @@ def main(args):
     # clf = svm_cross_validation(X, Y)
     # clf = KNN_cross_validation(X, Y)
     # clf = DecisionTree_cross_validation(X, Y)
-    clf = RandomForest_cross_validation(X, Y)
+    clf = NaiveBayes_cross_validation(X, Y)
     scores = cross_val_score(clf, X, Y, cv=cv)
     logger.info("Accuracy:")
     for i in range(len(scores)):
@@ -366,7 +359,7 @@ def parameter_parser():
                         help="Input folder with jsons.")
     parser.add_argument("--input-csv-path",
                         nargs="?",
-                        default="features/test.csv",
+                        default="../features/test.csv",
                         help="Input csv file which contains graphvecs.")
     parser.add_argument("--epochs",
                         type=int,
