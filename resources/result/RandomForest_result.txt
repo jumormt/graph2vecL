@@ -1,0 +1,53 @@
+2019-04-04 16:14:06,359 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-04 16:24:47,669 - __main__ - INFO - DesisionTree best param:
+2019-04-04 16:24:47,671 - __main__ - INFO - bootstrap True
+2019-04-04 16:24:47,671 - __main__ - INFO - class_weight None
+2019-04-04 16:24:47,671 - __main__ - INFO - criterion gini
+2019-04-04 16:24:47,671 - __main__ - INFO - max_depth None
+2019-04-04 16:24:47,671 - __main__ - INFO - max_features log2
+2019-04-04 16:24:47,671 - __main__ - INFO - max_leaf_nodes None
+2019-04-04 16:24:47,671 - __main__ - INFO - min_impurity_decrease 0.0
+2019-04-04 16:24:47,671 - __main__ - INFO - min_impurity_split None
+2019-04-04 16:24:47,671 - __main__ - INFO - min_samples_leaf 1
+2019-04-04 16:24:47,671 - __main__ - INFO - min_samples_split 2
+2019-04-04 16:24:47,671 - __main__ - INFO - min_weight_fraction_leaf 0.0
+2019-04-04 16:24:47,671 - __main__ - INFO - n_estimators 700
+2019-04-04 16:24:47,671 - __main__ - INFO - n_jobs None
+2019-04-04 16:24:47,672 - __main__ - INFO - oob_score False
+2019-04-04 16:24:47,672 - __main__ - INFO - random_state 0
+2019-04-04 16:24:47,672 - __main__ - INFO - verbose 0
+2019-04-04 16:24:47,672 - __main__ - INFO - warm_start False
+2019-04-04 16:25:34,653 - __main__ - INFO - Accuracy:
+2019-04-04 16:25:34,654 - __main__ - INFO - Accuracy0: 0.92670
+2019-04-04 16:25:34,654 - __main__ - INFO - Accuracy1: 0.94939
+2019-04-04 16:25:34,654 - __main__ - INFO - Accuracy2: 0.94939
+2019-04-04 16:25:34,654 - __main__ - INFO - Accuracy3: 0.95637
+2019-04-04 16:25:34,654 - __main__ - INFO - Accuracy4: 0.94939
+2019-04-04 16:25:34,654 - __main__ - INFO - Accuracy average: 0.94625 (+/- 0.02028)
+
+2019-04-04 16:28:27,595 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-04 16:32:11,552 - __main__ - INFO - DesisionTree best param:
+2019-04-04 16:32:11,555 - __main__ - INFO - bootstrap True
+2019-04-04 16:32:11,555 - __main__ - INFO - class_weight None
+2019-04-04 16:32:11,555 - __main__ - INFO - criterion gini
+2019-04-04 16:32:11,555 - __main__ - INFO - max_depth 50
+2019-04-04 16:32:11,555 - __main__ - INFO - max_features log2
+2019-04-04 16:32:11,555 - __main__ - INFO - max_leaf_nodes None
+2019-04-04 16:32:11,555 - __main__ - INFO - min_impurity_decrease 0.0
+2019-04-04 16:32:11,555 - __main__ - INFO - min_impurity_split None
+2019-04-04 16:32:11,556 - __main__ - INFO - min_samples_leaf 1
+2019-04-04 16:32:11,556 - __main__ - INFO - min_samples_split 2
+2019-04-04 16:32:11,556 - __main__ - INFO - min_weight_fraction_leaf 0.0
+2019-04-04 16:32:11,556 - __main__ - INFO - n_estimators 700
+2019-04-04 16:32:11,556 - __main__ - INFO - n_jobs None
+2019-04-04 16:32:11,556 - __main__ - INFO - oob_score False
+2019-04-04 16:32:11,556 - __main__ - INFO - random_state 0
+2019-04-04 16:32:11,556 - __main__ - INFO - verbose 0
+2019-04-04 16:32:11,556 - __main__ - INFO - warm_start False
+2019-04-04 16:33:00,797 - __main__ - INFO - Accuracy:
+2019-04-04 16:33:00,798 - __main__ - INFO - Accuracy0: 0.92670
+2019-04-04 16:33:00,798 - __main__ - INFO - Accuracy1: 0.94939
+2019-04-04 16:33:00,798 - __main__ - INFO - Accuracy2: 0.94939
+2019-04-04 16:33:00,798 - __main__ - INFO - Accuracy3: 0.95637
+2019-04-04 16:33:00,798 - __main__ - INFO - Accuracy4: 0.94939
+2019-04-04 16:33:00,798 - __main__ - INFO - Accuracy average: 0.94625 (+/- 0.02028)

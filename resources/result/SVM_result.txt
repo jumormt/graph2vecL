@@ -1,0 +1,23 @@
+2019-04-04 15:03:22,828 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-04 15:07:15,935 - __main__ - INFO - SVM best param:
+2019-04-04 15:07:15,936 - __main__ - INFO - C 1000
+2019-04-04 15:07:15,936 - __main__ - INFO - cache_size 200
+2019-04-04 15:07:15,936 - __main__ - INFO - class_weight None
+2019-04-04 15:07:15,936 - __main__ - INFO - coef0 0.0
+2019-04-04 15:07:15,936 - __main__ - INFO - decision_function_shape ovr
+2019-04-04 15:07:15,936 - __main__ - INFO - degree 3
+2019-04-04 15:07:15,936 - __main__ - INFO - gamma 0.01
+2019-04-04 15:07:15,936 - __main__ - INFO - kernel rbf
+2019-04-04 15:07:15,937 - __main__ - INFO - max_iter -1
+2019-04-04 15:07:15,937 - __main__ - INFO - probability True
+2019-04-04 15:07:15,937 - __main__ - INFO - random_state None
+2019-04-04 15:07:15,937 - __main__ - INFO - shrinking True
+2019-04-04 15:07:15,937 - __main__ - INFO - tol 0.001
+2019-04-04 15:07:15,937 - __main__ - INFO - verbose False
+2019-04-04 15:07:29,713 - __main__ - INFO - Accuracy:
+2019-04-04 15:07:29,713 - __main__ - INFO - Accuracy0: 0.91623
+2019-04-04 15:07:29,714 - __main__ - INFO - Accuracy1: 0.93543
+2019-04-04 15:07:29,714 - __main__ - INFO - Accuracy2: 0.91274
+2019-04-04 15:07:29,714 - __main__ - INFO - Accuracy3: 0.93717
+2019-04-04 15:07:29,714 - __main__ - INFO - Accuracy4: 0.94241
+2019-04-04 15:07:29,714 - __main__ - INFO - Accuracy average: 0.92880 (+/- 0.02392)
