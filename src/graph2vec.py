@@ -27,7 +27,10 @@ class WeisfeilerLehmanMachine:
         self.graph = graph
         self.features = features
         self.nodes = self.graph.nodes()
-        self.extracted_features = [str(v) for k,v in features.items()]
+        # self.extracted_features = [str(v) for k,v in features.items()]
+        self.extracted_features = list()
+        for k, v in features.items():
+            self.extracted_features.extend(v.split())
         self.do_recursions()
 
     def do_a_recursion(self):
@@ -38,6 +41,10 @@ class WeisfeilerLehmanMachine:
         new_features = {}
         for node in self.nodes:
             nebs = self.graph.neighbors(node)
+            # degs = list()
+            # for neb in nebs:
+            #     degs.extend(self.features[neb].split())
+            # features = " ".join([str(self.features[node])]+list(set(sorted([str(deg) for deg in degs]))))
             degs = [self.features[neb] for neb in nebs]
             features = "_".join([str(self.features[node])]+list(set(sorted([str(deg) for deg in degs]))))
             hash_object = hashlib.md5(features.encode())
@@ -113,7 +120,7 @@ def main(args):
     :param args: Object with the arguments.
     """
     args.input_path = u"/Users/chengxiao/Downloads/graph2vec-master/dataset_test/"
-    args.output_path = u"/Users/chengxiao/Downloads/graph2vec-master/features/test2.csv"
+    args.output_path = u"/Users/chengxiao/Downloads/graph2vec-master/features/test.csv"
     graphs = glob.glob(args.input_path + "*.json")
     print("\nFeature extraction started.\n")
     document_collections = Parallel(n_jobs = args.workers)(delayed(feature_extractor)(g, args.wl_iterations) for g in tqdm(graphs))
