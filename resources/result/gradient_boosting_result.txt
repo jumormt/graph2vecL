@@ -1,0 +1,54 @@
+2019-04-08 16:39:01,335 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-08 16:39:01,350 - __main__ - INFO - gradient_boosting best param:
+2019-04-08 16:40:18,238 - __main__ - INFO - criterion friedman_mse
+2019-04-08 16:40:18,239 - __main__ - INFO - init None
+2019-04-08 16:40:18,239 - __main__ - INFO - learning_rate 0.1
+2019-04-08 16:40:18,240 - __main__ - INFO - loss deviance
+2019-04-08 16:40:18,240 - __main__ - INFO - max_depth 13
+2019-04-08 16:40:18,240 - __main__ - INFO - max_features 11
+2019-04-08 16:40:18,240 - __main__ - INFO - max_leaf_nodes None
+2019-04-08 16:40:18,240 - __main__ - INFO - min_impurity_decrease 0.0
+2019-04-08 16:40:18,240 - __main__ - INFO - min_impurity_split None
+2019-04-08 16:40:18,240 - __main__ - INFO - min_samples_leaf 40
+2019-04-08 16:40:18,240 - __main__ - INFO - min_samples_split 80
+2019-04-08 16:40:18,240 - __main__ - INFO - min_weight_fraction_leaf 0.0
+2019-04-08 16:40:18,240 - __main__ - INFO - n_estimators 290
+2019-04-08 16:40:18,240 - __main__ - INFO - n_iter_no_change None
+2019-04-08 16:40:18,240 - __main__ - INFO - presort auto
+2019-04-08 16:40:18,240 - __main__ - INFO - random_state None
+2019-04-08 16:40:18,241 - __main__ - INFO - subsample 1.0
+2019-04-08 16:40:18,241 - __main__ - INFO - tol 0.0001
+2019-04-08 16:40:18,241 - __main__ - INFO - validation_fraction 0.1
+2019-04-08 16:40:18,241 - __main__ - INFO - verbose 0
+2019-04-08 16:40:18,241 - __main__ - INFO - warm_start False
+2019-04-08 16:43:15,442 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-08 16:43:30,855 - __main__ - INFO - Accuracy:
+2019-04-08 16:43:30,856 - __main__ - INFO - Accuracy0: 0.94939
+2019-04-08 16:43:30,856 - __main__ - INFO - Accuracy1: 0.95637
+2019-04-08 16:43:30,856 - __main__ - INFO - Accuracy2: 0.94590
+2019-04-08 16:43:30,856 - __main__ - INFO - Accuracy3: 0.94939
+2019-04-08 16:43:30,856 - __main__ - INFO - Accuracy4: 0.95637
+2019-04-08 16:43:30,856 - __main__ - INFO - Accuracy average: 0.95148 (+/- 0.00838)
+2019-04-08 16:43:58,830 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-08 16:45:15,181 - __main__ - INFO - Accuracy:
+2019-04-08 16:45:15,216 - __main__ - INFO - Accuracy0: 0.95113
+2019-04-08 16:45:15,216 - __main__ - INFO - Accuracy1: 0.95113
+2019-04-08 16:45:15,216 - __main__ - INFO - Accuracy2: 0.94066
+2019-04-08 16:45:15,216 - __main__ - INFO - Accuracy3: 0.95812
+2019-04-08 16:45:15,216 - __main__ - INFO - Accuracy4: 0.95986
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy5: 0.92496
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy6: 0.94939
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy7: 0.93892
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy8: 0.93892
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy9: 0.94241
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy10: 0.95113
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy11: 0.93194
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy12: 0.94241
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy13: 0.95113
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy14: 0.93194
+2019-04-08 16:45:15,217 - __main__ - INFO - Accuracy15: 0.93892
+2019-04-08 16:45:15,218 - __main__ - INFO - Accuracy16: 0.94241
+2019-04-08 16:45:15,218 - __main__ - INFO - Accuracy17: 0.95288
+2019-04-08 16:45:15,218 - __main__ - INFO - Accuracy18: 0.94939
+2019-04-08 16:45:15,218 - __main__ - INFO - Accuracy19: 0.95812
+2019-04-08 16:45:15,218 - __main__ - INFO - Accuracy average: 0.94529 (+/- 0.01848)

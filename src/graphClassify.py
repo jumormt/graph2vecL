@@ -57,7 +57,7 @@ import sys
 logger = logging.getLogger(__name__)
 logger.setLevel(level=logging.INFO)
 file_handler = logging.FileHandler(
-    '../resources/result/NaiveBayes_result.txt.txt')
+    '../resources/result/gradient_boosting_result.txt')
 file_handler.setLevel(level=logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
@@ -301,6 +301,91 @@ def RandomForest_cross_validation(train_x, train_y):
     return clf
 
 
+def gradient_boosting_classifier_cross_validation(train_x, train_y):
+    '''
+    GBDT(Gradient Boosting Decision Tree) Classifier
+    :param train_x:
+    :param train_y:
+    :return:
+    '''
+    from sklearn.ensemble import GradientBoostingClassifier
+
+    # logger.info("gradient_boosting best param:")
+    clf = GradientBoostingClassifier(max_features=11, min_samples_leaf=40, n_estimators=290, max_depth=13,
+                                     min_samples_split=80)
+
+    # param1 = {'n_estimators': range(200, 301, 10)}
+    # grid_search = GridSearchCV(clf, param1, n_jobs=8, verbose=1, cv=5)
+    # grid_search.fit(train_x, train_y)
+    # best_parameters1 = grid_search.best_estimator_.get_params()
+    # for para, val in list(best_parameters1.items()):
+    #     # print(para, val)
+    #     logger.info(str(para) + " " + str(val))
+
+    # clf = GradientBoostingClassifier(n_estimators=best_parameters1['n_estimators'])
+    # param_test2 = {'max_depth': range(5, 16, 2), 'min_samples_split': range(200, 1001, 200)}
+    # grid_search = GridSearchCV(clf, param_test2, n_jobs=8, verbose=1, cv=5)
+    # grid_search.fit(train_x, train_y)
+    # best_parameters2 = grid_search.best_estimator_.get_params()
+    # for para, val in list(best_parameters2.items()):
+    #     # print(para, val)
+    #     logger.info(str(para) + " " + str(val))
+    #
+    # clf = GradientBoostingClassifier(min_samples_split=best_parameters2['min_samples_split'],
+    #                                  max_depth=best_parameters2['max_depth'],
+    #                                  n_estimators=best_parameters1['n_estimators'])
+    # param_test3 = {'min_samples_split': range(1000, 2100, 200), 'min_samples_leaf': range(30, 71, 10)}
+    # grid_search = GridSearchCV(clf, param_test3, n_jobs=8, verbose=1, cv=5)
+    # grid_search.fit(train_x, train_y)
+    # best_parameters3 = grid_search.best_estimator_.get_params()
+    # for para, val in list(best_parameters3.items()):
+    #     # print(para, val)
+    #     logger.info(str(para) + " " + str(val))
+    #
+    # clf = GradientBoostingClassifier(min_samples_split=best_parameters2['min_samples_split'],
+    #                                  max_depth=best_parameters2['max_depth'],
+    #                                  n_estimators=best_parameters1['n_estimators'])
+    #
+    # param_test4 = {'max_features': range(7, 20, 2)}
+    return clf
+
+
+def xgboost_cross_validation(train_x, train_y):
+    '''
+    xgboost
+    :param train_x:
+    :param train_y:
+    :return:
+    '''
+    from sklearn.model_selection import cross_val_score, GridSearchCV, RandomizedSearchCV
+    import xgboost as xgb
+    from scipy.stats import uniform, randint
+    xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42)
+    params = {
+        "colsample_bytree": uniform(0.7, 0.3),
+        "gamma": uniform(0, 0.5),
+        "learning_rate": uniform(0.03, 0.3),  # default 0.1
+        "max_depth": randint(2, 6),  # default 3
+        "n_estimators": randint(100, 150),  # default 100
+        "subsample": uniform(0.6, 0.4)
+    }
+    search = RandomizedSearchCV(xgb_model, param_distributions=params, random_state=42, n_iter=200, cv=5, verbose=1,
+                                n_jobs=8, return_train_score=True)
+
+    search.fit(train_x, train_y)
+    best_parameters = search.best_estimator_.get_params()
+    logger.info("xgboost best param:")
+    for para, val in list(best_parameters.items()):
+        # print(para, val)
+        logger.info(str(para) + " " + str(val))
+    model = xgb.XGBClassifier(subsample=best_parameters["subsample"], max_depth=best_parameters["max_depth"],
+                              n_estimators=best_parameters["n_estimators"],
+                              gamma=best_parameters["gamma"], learning_rate=best_parameters["learning_rate"],
+                              colsample_bytree=best_parameters["colsample_bytree"], objective="binary:logistic",
+                              random_state=42)
+    return model
+
+
 def output(path, str):
     with open(path, 'a', encoding="utf-8") as f:
         f.write(str)
@@ -324,7 +409,9 @@ def main(args):
     # clf = svm_cross_validation(X, Y)
     # clf = KNN_cross_validation(X, Y)
     # clf = DecisionTree_cross_validation(X, Y)
-    clf = NaiveBayes_cross_validation(X, Y)
+    # clf = NaiveBayes_cross_validation(X, Y)
+    # clf = RandomForestClassifier(max_depth=50, max_features='log2', n_estimators=700)
+    clf = gradient_boosting_classifier_cross_validation(X, Y)
     scores = cross_val_score(clf, X, Y, cv=cv)
     logger.info("Accuracy:")
     for i in range(len(scores)):
@@ -335,11 +422,6 @@ def main(args):
     logger.info(
         "Accuracy average: %0.5f (+/- %0.5f)" % (scores.mean(), scores.std() * 2))
 
-    # scores = cross_validate(clf, X, Y, scoring=scoring,
-    #                         cv=5, return_train_score=True)
-    # predicted = cross_val_predict(clf, X, Y, cv=10)
-
-    # print(metrics.accuracy_score(Y, predicted))
 
     print("end")
 
