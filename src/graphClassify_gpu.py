@@ -58,7 +58,7 @@ import sys
 logger = logging.getLogger(__name__)
 logger.setLevel(level=logging.INFO)
 file_handler = logging.FileHandler(
-    '../resources/result/test787_decisiontree_result.txt')
+    '../resources/result/test787_xgboost_result.txt')
 file_handler.setLevel(level=logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
@@ -132,14 +132,14 @@ def getXY(graphs):
 
     # 结合采样
     # https://blog.csdn.net/kizgel/article/details/78553009
-    # smote_tomek = SMOTETomek(random_state=0)
-    # X_resampled, y_resampled = smote_tomek.fit_sample(X, Y)
-    # logger.info(sorted(Counter(y_resampled).items()))
+    smote_tomek = SMOTETomek(random_state=0)
+    X_resampled, y_resampled = smote_tomek.fit_sample(X, Y)
+    logger.info(sorted(Counter(y_resampled).items()))
     # print(sorted(Counter(y_resampled).items()))
 
-    rus = RandomUnderSampler(random_state=0)
-    X_resampled, y_resampled = rus.fit_sample(X, Y)
-    logger.info(sorted(Counter(y_resampled).items()))
+    # rus = RandomUnderSampler(random_state=0)
+    # X_resampled, y_resampled = rus.fit_sample(X, Y)
+    # logger.info(sorted(Counter(y_resampled).items()))
 
     # 预处理 (X-mean)/std  计算时对每个属性/每列分别进行。
     # 将数据按期属性（按列进行）减去其均值，并处以其方差。得到的结果是，对于每个属性/每列来说所有数据都聚集在0附近，方差为1。
@@ -374,20 +374,52 @@ def xgboost_cross_validation(train_x, train_y):
         "n_estimators": randint(100, 150),  # default 100
         "subsample": uniform(0.6, 0.4)
     }
-    search = RandomizedSearchCV(xgb_model, param_distributions=params, random_state=42, n_iter=200, cv=3, verbose=1,
-                                n_jobs=8, return_train_score=True)
 
-    search.fit(train_x, train_y)
-    best_parameters = search.best_estimator_.get_params()
-    logger.info("xgboost best param:")
-    for para, val in list(best_parameters.items()):
+    cv_params = {'n_estimators': [400, 500, 600, 700, 800]}
+    optimized_GBM = GridSearchCV(estimator=xgb_model, param_grid=cv_params, cv=3, verbose=1, n_jobs=8)
+    optimized_GBM.fit(train_x, train_y)
+    best_para = optimized_GBM.best_estimator_.get_params()
+    for para, val in list(best_para.items()):
         # print(para, val)
         logger.info(str(para) + " " + str(val))
-    model = xgb.XGBClassifier(subsample=best_parameters["subsample"], max_depth=best_parameters["max_depth"],
-                              n_estimators=best_parameters["n_estimators"],
-                              gamma=best_parameters["gamma"], learning_rate=best_parameters["learning_rate"],
-                              colsample_bytree=best_parameters["colsample_bytree"], objective="binary:logistic",
-                              random_state=42)
+    model = xgb.XGBClassifier(objective="binary:logistic", random_state=42, n_estimators=best_para['n_estimators'])
+
+    # model = xgb.XGBClassifier(objective="binary:logistic", random_state=42, n_estimators=best_para['n_estimators'])
+    # cv_params = {'max_depth': [3, 4, 5, 6, 7, 8, 9, 10], 'min_child_weight': [1, 2, 3, 4, 5, 6]}
+    # optimized_GBM = GridSearchCV(estimator=xgb_model, param_grid=cv_params, cv=5, verbose=1, n_jobs=4)
+    # optimized_GBM.fit(train_x, train_y)
+    # best_para = optimized_GBM.best_estimator_.get_params()
+    # for para, val in list(best_para.items()):
+    #     # print(para, val)
+    #     logger.info(str(para) + " " + str(val))
+
+    # model = xgb.XGBClassifier(objective="binary:logistic", random_state=42, n_estimators=, max_depth=,
+    #                           min_child_weight=)
+    # param_test3 = {
+    #     'gamma': [i / 10.0 for i in range(0, 5)]
+    # }
+    # param_test4 = {
+    #     'subsample': [i / 10.0 for i in range(6, 10)],
+    #     'colsample_bytree': [i / 10.0 for i in range(6, 10)]
+    # }
+    # param_test6 = {
+    #     'reg_alpha': [1e-5, 1e-2, 0.1, 1, 100]
+    # }
+
+    # search = RandomizedSearchCV(xgb_model, param_distributions=params, random_state=42, n_iter=200, cv=5, verbose=1,
+    #                             n_jobs=8, return_train_score=True)
+    #
+    # search.fit(train_x, train_y)
+    # best_parameters = search.best_estimator_.get_params()
+    # logger.info("xgboost best param:")
+    # for para, val in list(best_parameters.items()):
+    #     # print(para, val)
+    #     logger.info(str(para) + " " + str(val))
+    # model = xgb.XGBClassifier(subsample=best_parameters["subsample"], max_depth=best_parameters["max_depth"],
+    #                           n_estimators=best_parameters["n_estimators"],
+    #                           gamma=best_parameters["gamma"], learning_rate=best_parameters["learning_rate"],
+    #                           colsample_bytree=best_parameters["colsample_bytree"], objective="binary:logistic",
+    #                           random_state=42)
     return model
 
 
@@ -399,7 +431,7 @@ def main(args):
 
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state=0)
 
-    cv = ShuffleSplit(n_splits=3, test_size=0.2, random_state=0)
+    cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
     # scoring = ['precision_macro', 'recall_macro']
 
     # clf.fit(X_train, y_train)
@@ -419,18 +451,18 @@ def main(args):
     # clf = GradientBoostingClassifier(max_features=11, min_samples_leaf=40, n_estimators=290, max_depth=13,
     #                                  min_samples_split=80)
     clf = xgboost_cross_validation(X, Y)
-    scores = cross_val_score(clf, X, Y, cv=cv)
-    logger.info("Accuracy:")
-    for i in range(len(scores)):
-        # print("Accuracy%d: %0.5f" % (i, scores[i]))
-        logger.info("Accuracy%d: %0.5f" % (i, scores[i]))
-
-    print("Accuracy average: %0.5f (+/- %0.5f)" % (scores.mean(), scores.std() * 2))
-    logger.info(
-        "Accuracy average: %0.5f (+/- %0.5f)" % (scores.mean(), scores.std() * 2))
-
-
-    print("end")
+    # scores = cross_val_score(clf, X, Y, cv=cv)
+    # logger.info("Accuracy:")
+    # for i in range(len(scores)):
+    #     # print("Accuracy%d: %0.5f" % (i, scores[i]))
+    #     logger.info("Accuracy%d: %0.5f" % (i, scores[i]))
+    #
+    # print("Accuracy average: %0.5f (+/- %0.5f)" % (scores.mean(), scores.std() * 2))
+    # logger.info(
+    #     "Accuracy average: %0.5f (+/- %0.5f)" % (scores.mean(), scores.std() * 2))
+    #
+    #
+    # print("end")
 
 
 def parameter_parser():
@@ -445,7 +477,7 @@ def parameter_parser():
     parser.add_argument("--input-json-path",
                         nargs="?",
                         # default="/Users/chengxiao/Desktop/VulDeepecker/资料/project/CGDSymbolization/src/main/resources/result",
-                        default="/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/result_sym",
+                        default="/home/cry/chengxiao/dataset/SARD.2019-02-28-22-07-31/result_sym",
                         help="Input folder with jsons.")
     parser.add_argument("--input-csv-path",
                         nargs="?",

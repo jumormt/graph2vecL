@@ -1,0 +1,45 @@
+2019-04-09 09:53:16,474 - __main__ - INFO - [(0, 7937), (1, 7937)]
+2019-04-09 09:53:17,329 - __main__ - INFO - Accuracy:
+2019-04-09 09:53:17,329 - __main__ - INFO - Accuracy0: 0.69764
+2019-04-09 09:53:17,330 - __main__ - INFO - Accuracy1: 0.71559
+2019-04-09 09:53:17,330 - __main__ - INFO - Accuracy2: 0.70929
+2019-04-09 09:53:17,330 - __main__ - INFO - Accuracy3: 0.70551
+2019-04-09 09:53:17,330 - __main__ - INFO - Accuracy4: 0.69575
+2019-04-09 09:53:17,330 - __main__ - INFO - Accuracy average: 0.70476 (+/- 0.01471)
+2019-04-09 09:55:38,307 - __main__ - INFO - [(0, 7937), (1, 7937)]
+2019-04-09 10:03:02,870 - __main__ - INFO - [(0, 7937), (1, 7937)]
+2019-04-09 10:05:36,412 - __main__ - INFO - [(0, 7937), (1, 7937)]
+2019-04-09 10:07:55,560 - __main__ - INFO - [(0, 7937), (1, 7937)]
+2019-04-09 10:09:11,746 - __main__ - INFO - Accuracy:
+2019-04-09 10:09:11,746 - __main__ - INFO - Accuracy0: 0.79685
+2019-04-09 10:09:11,746 - __main__ - INFO - Accuracy1: 0.79559
+2019-04-09 10:09:11,746 - __main__ - INFO - Accuracy2: 0.78992
+2019-04-09 10:09:11,747 - __main__ - INFO - Accuracy average: 0.79412 (+/- 0.00603)
+2019-04-09 10:21:34,883 - __main__ - INFO - [(0, 7937), (1, 7937)]
+2019-04-09 11:06:18,182 - __main__ - INFO - xgboost best param:
+2019-04-09 11:06:18,189 - __main__ - INFO - base_score 0.5
+2019-04-09 11:06:18,189 - __main__ - INFO - booster gbtree
+2019-04-09 11:06:18,190 - __main__ - INFO - colsample_bylevel 1
+2019-04-09 11:06:18,190 - __main__ - INFO - colsample_bytree 0.9212503744329245
+2019-04-09 11:06:18,190 - __main__ - INFO - gamma 0.22610897044490358
+2019-04-09 11:06:18,190 - __main__ - INFO - learning_rate 0.09738144688199458
+2019-04-09 11:06:18,190 - __main__ - INFO - max_delta_step 0
+2019-04-09 11:06:18,190 - __main__ - INFO - max_depth 5
+2019-04-09 11:06:18,190 - __main__ - INFO - min_child_weight 1
+2019-04-09 11:06:18,190 - __main__ - INFO - missing None
+2019-04-09 11:06:18,190 - __main__ - INFO - n_estimators 123
+2019-04-09 11:06:18,191 - __main__ - INFO - n_jobs 1
+2019-04-09 11:06:18,191 - __main__ - INFO - nthread None
+2019-04-09 11:06:18,191 - __main__ - INFO - objective binary:logistic
+2019-04-09 11:06:18,191 - __main__ - INFO - random_state 42
+2019-04-09 11:06:18,191 - __main__ - INFO - reg_alpha 0
+2019-04-09 11:06:18,191 - __main__ - INFO - reg_lambda 1
+2019-04-09 11:06:18,191 - __main__ - INFO - scale_pos_weight 1
+2019-04-09 11:06:18,191 - __main__ - INFO - seed None
+2019-04-09 11:06:18,192 - __main__ - INFO - silent True
+2019-04-09 11:06:18,192 - __main__ - INFO - subsample 0.8310527816366189
+2019-04-09 11:07:09,679 - __main__ - INFO - Accuracy:
+2019-04-09 11:07:09,679 - __main__ - INFO - Accuracy0: 0.80031
+2019-04-09 11:07:09,679 - __main__ - INFO - Accuracy1: 0.78551
+2019-04-09 11:07:09,679 - __main__ - INFO - Accuracy2: 0.78929
+2019-04-09 11:07:09,680 - __main__ - INFO - Accuracy average: 0.79171 (+/- 0.01256)
