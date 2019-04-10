@@ -22,3 +22,71 @@
 2019-04-08 09:35:54,447 - __main__ - INFO - Accuracy19: 0.96510
 2019-04-08 09:35:54,448 - __main__ - INFO - Accuracy average: 0.94319 (+/- 0.02324)
 2019-04-08 09:41:46,410 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-09 15:36:24,545 - __main__ - INFO - [(0, 4450), (1, 4450)]
+2019-04-09 16:32:53,639 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-09 16:33:52,165 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-09 16:33:57,576 - __main__ - INFO - DesisionTree best param:
+2019-04-09 16:33:57,576 - __main__ - INFO - class_weight None
+2019-04-09 16:33:57,576 - __main__ - INFO - criterion gini
+2019-04-09 16:33:57,576 - __main__ - INFO - max_depth None
+2019-04-09 16:33:57,576 - __main__ - INFO - max_features 4
+2019-04-09 16:33:57,576 - __main__ - INFO - max_leaf_nodes None
+2019-04-09 16:33:57,577 - __main__ - INFO - min_impurity_decrease 0.0
+2019-04-09 16:33:57,577 - __main__ - INFO - min_impurity_split None
+2019-04-09 16:33:57,577 - __main__ - INFO - min_samples_leaf 1
+2019-04-09 16:33:57,577 - __main__ - INFO - min_samples_split 2
+2019-04-09 16:33:57,577 - __main__ - INFO - min_weight_fraction_leaf 0.0
+2019-04-09 16:33:57,577 - __main__ - INFO - presort False
+2019-04-09 16:33:57,577 - __main__ - INFO - random_state None
+2019-04-09 16:33:57,577 - __main__ - INFO - splitter best
+2019-04-09 16:33:58,692 - __main__ - INFO - Accuracy:
+2019-04-09 16:33:58,692 - __main__ - INFO - Accuracy0: 0.83944
+2019-04-09 16:33:58,692 - __main__ - INFO - Accuracy1: 0.83072
+2019-04-09 16:33:58,692 - __main__ - INFO - Accuracy2: 0.84642
+2019-04-09 16:33:58,692 - __main__ - INFO - Accuracy average: 0.83886 (+/- 0.01285)
+2019-04-09 16:36:58,453 - __main__ - INFO - [(0, 4450), (1, 4450)]
+2019-04-09 16:59:38,022 - __main__ - INFO - xgboost best param:
+2019-04-09 16:59:38,031 - __main__ - INFO - base_score 0.5
+2019-04-09 16:59:38,031 - __main__ - INFO - booster gbtree
+2019-04-09 16:59:38,031 - __main__ - INFO - colsample_bylevel 1
+2019-04-09 16:59:38,031 - __main__ - INFO - colsample_bytree 0.7809733667176584
+2019-04-09 16:59:38,031 - __main__ - INFO - gamma 0.2699213894540967
+2019-04-09 16:59:38,031 - __main__ - INFO - learning_rate 0.07860416336747539
+2019-04-09 16:59:38,032 - __main__ - INFO - max_delta_step 0
+2019-04-09 16:59:38,032 - __main__ - INFO - max_depth 5
+2019-04-09 16:59:38,032 - __main__ - INFO - min_child_weight 1
+2019-04-09 16:59:38,032 - __main__ - INFO - missing None
+2019-04-09 16:59:38,032 - __main__ - INFO - n_estimators 142
+2019-04-09 16:59:38,032 - __main__ - INFO - n_jobs 1
+2019-04-09 16:59:38,032 - __main__ - INFO - nthread None
+2019-04-09 16:59:38,032 - __main__ - INFO - objective binary:logistic
+2019-04-09 16:59:38,032 - __main__ - INFO - random_state 42
+2019-04-09 16:59:38,033 - __main__ - INFO - reg_alpha 0
+2019-04-09 16:59:38,033 - __main__ - INFO - reg_lambda 1
+2019-04-09 16:59:38,033 - __main__ - INFO - scale_pos_weight 1
+2019-04-09 16:59:38,033 - __main__ - INFO - seed None
+2019-04-09 16:59:38,033 - __main__ - INFO - silent True
+2019-04-09 16:59:38,033 - __main__ - INFO - subsample 0.938563139725823
+2019-04-09 17:00:04,745 - __main__ - INFO - Accuracy:
+2019-04-09 17:00:04,747 - __main__ - INFO - Accuracy0: 0.75955
+2019-04-09 17:00:04,747 - __main__ - INFO - Accuracy1: 0.73483
+2019-04-09 17:00:04,747 - __main__ - INFO - Accuracy2: 0.72753
+2019-04-09 17:00:04,747 - __main__ - INFO - Accuracy average: 0.74064 (+/- 0.02740)
+2019-04-09 17:09:34,561 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-09 17:09:49,339 - __main__ - INFO - Accuracy:
+2019-04-09 17:09:49,339 - __main__ - INFO - Accuracy0: 0.80977
+2019-04-09 17:09:49,339 - __main__ - INFO - Accuracy1: 0.81675
+2019-04-09 17:09:49,339 - __main__ - INFO - Accuracy2: 0.80279
+2019-04-09 17:09:49,339 - __main__ - INFO - Accuracy average: 0.80977 (+/- 0.01140)
+2019-04-09 17:10:10,467 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-09 17:10:25,076 - __main__ - INFO - Accuracy:
+2019-04-09 17:10:25,076 - __main__ - INFO - Accuracy0: 0.80628
+2019-04-09 17:10:25,077 - __main__ - INFO - Accuracy1: 0.82199
+2019-04-09 17:10:25,077 - __main__ - INFO - Accuracy2: 0.80803
+2019-04-09 17:10:25,077 - __main__ - INFO - Accuracy average: 0.81210 (+/- 0.01406)
+2019-04-09 17:10:44,500 - __main__ - INFO - [(0, 1431), (1, 1431)]
+2019-04-09 17:11:10,354 - __main__ - INFO - Accuracy:
+2019-04-09 17:11:10,355 - __main__ - INFO - Accuracy0: 0.92845
+2019-04-09 17:11:10,355 - __main__ - INFO - Accuracy1: 0.94066
+2019-04-09 17:11:10,355 - __main__ - INFO - Accuracy2: 0.94415
+2019-04-09 17:11:10,355 - __main__ - INFO - Accuracy average: 0.93775 (+/- 0.01347)

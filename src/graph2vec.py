@@ -120,8 +120,8 @@ def main(args):
     :param args: Object with the arguments.
     """
     # args.input_path = u"/Users/chengxiao/Downloads/graph2vec-master/dataset_test/"
-    args.input_path = u"/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/result_sym_pre/"
-    args.output_path = u"/Users/chengxiao/Downloads/graph2vec-master/features/test-787.csv"
+    args.input_path = u"/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/cut_result_sym_pre/"
+    args.output_path = u"/Users/chengxiao/Downloads/graph2vec-master/features/test-787-cut.csv"
     graphs = glob.glob(args.input_path + "*.json")
     print("\nFeature extraction started.\n")
     document_collections = Parallel(n_jobs = args.workers)(delayed(feature_extractor)(g, args.wl_iterations) for g in tqdm(graphs))

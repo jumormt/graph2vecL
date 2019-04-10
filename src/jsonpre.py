@@ -2,9 +2,9 @@ import json
 import os
 
 # inputpath = "/Users/chengxiao/Desktop/VulDeepecker/资料/project/CGDSymbolization/src/main/resources/result"
-inputpath = "/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/result_sym/"
+inputpath = "/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/cut_result_sym/"
 # outputjson = "/Users/chengxiao/Downloads/graph2vec-master/dataset_test/"
-outputjson = "/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/result_sym_pre/"
+outputjson = "/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/cut_result_sym_pre/"
 
 def main():
     for dirpath, dirnames, filenames in os.walk(inputpath):

@@ -58,7 +58,7 @@ import sys
 logger = logging.getLogger(__name__)
 logger.setLevel(level=logging.INFO)
 file_handler = logging.FileHandler(
-    '../resources/result/test787_decisiontree_result.txt')
+    '../resources/result/test.txt')
 file_handler.setLevel(level=logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
@@ -132,14 +132,14 @@ def getXY(graphs):
 
     # 结合采样
     # https://blog.csdn.net/kizgel/article/details/78553009
-    # smote_tomek = SMOTETomek(random_state=0)
-    # X_resampled, y_resampled = smote_tomek.fit_sample(X, Y)
-    # logger.info(sorted(Counter(y_resampled).items()))
+    smote_tomek = SMOTETomek(random_state=0)
+    X_resampled, y_resampled = smote_tomek.fit_sample(X, Y)
+    logger.info(sorted(Counter(y_resampled).items()))
     # print(sorted(Counter(y_resampled).items()))
 
-    rus = RandomUnderSampler(random_state=0)
-    X_resampled, y_resampled = rus.fit_sample(X, Y)
-    logger.info(sorted(Counter(y_resampled).items()))
+    # rus = RandomUnderSampler(random_state=0)
+    # X_resampled, y_resampled = rus.fit_sample(X, Y)
+    # logger.info(sorted(Counter(y_resampled).items()))
 
     # 预处理 (X-mean)/std  计算时对每个属性/每列分别进行。
     # 将数据按期属性（按列进行）减去其均值，并处以其方差。得到的结果是，对于每个属性/每列来说所有数据都聚集在0附近，方差为1。
@@ -412,13 +412,13 @@ def main(args):
     # clf = KNN_cross_validation(X, Y)
     # clf = DecisionTree_cross_validation(X, Y)
     # clf = NaiveBayes_cross_validation(X, Y)
-    # clf = RandomForestClassifier(criterion='gini',max_depth=50, max_features='log2', n_estimators=700)
+    clf = RandomForestClassifier(criterion='gini',max_depth=50, max_features='log2', n_estimators=700)
     # clf = gradient_boosting_classifier_cross_validation(X, Y)
     # clf = DecisionTreeClassifier(criterion='gini', splitter='best', max_features=6)
     # clf = SVC(C=1000, gamma=0.01)
     # clf = GradientBoostingClassifier(max_features=11, min_samples_leaf=40, n_estimators=290, max_depth=13,
     #                                  min_samples_split=80)
-    clf = xgboost_cross_validation(X, Y)
+    # clf = xgboost_cross_validation(X, Y)
     scores = cross_val_score(clf, X, Y, cv=cv)
     logger.info("Accuracy:")
     for i in range(len(scores)):
@@ -444,12 +444,12 @@ def parameter_parser():
 
     parser.add_argument("--input-json-path",
                         nargs="?",
-                        # default="/Users/chengxiao/Desktop/VulDeepecker/资料/project/CGDSymbolization/src/main/resources/result",
-                        default="/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/result_sym",
+                        default="/Users/chengxiao/Desktop/VulDeepecker/资料/project/CGDSymbolization/src/main/resources/result",
+                        # default="/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/cut_result_sym",
                         help="Input folder with jsons.")
     parser.add_argument("--input-csv-path",
                         nargs="?",
-                        default="../features/test-787.csv",
+                        default="../features/test.csv",
                         help="Input csv file which contains graphvecs.")
     parser.add_argument("--epochs",
                         type=int,
