@@ -62,7 +62,7 @@ import time
 logger = logging.getLogger(__name__)
 logger.setLevel(level=logging.INFO)
 file_handler = logging.FileHandler(
-    '../resources/result/test787_addswitch_xgboost_gpu_result.txt')
+    '../resources/result/test787_xgboost_cut_result.txt')
 file_handler.setLevel(level=logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
@@ -136,7 +136,7 @@ def getXY(graphs):
 
     # 结合采样
     # https://blog.csdn.net/kizgel/article/details/78553009
-    smote_tomek = SMOTEENN(random_state=0)
+    smote_tomek = SMOTETomek(random_state=0)
     X_resampled, y_resampled = smote_tomek.fit_sample(X, Y)
     # X_resampled, y_resampled = X,Y
     logger.info(sorted(Counter(y_resampled).items()))
@@ -454,12 +454,12 @@ def get_xgboost_params(X, Y):
          'tree_method': ['gpu_hist'],
          'objective': ['binary:logistic'],
          'num_round': [877],
-         'max_depth':[17],
-         'min_child_weight':[5],
+         'max_depth':range(9,16,2),
+         #  'min_child_weight':[1],
          # 'gamma': [0],
-         'subsample': [0.8],
-         'colsample_bytree': [0.9],
-         'reg_alpha': [0.1],
+         # 'subsample': [0.9],
+         # 'colsample_bytree': [0.6],
+         # 'reg_alpha': [0.1],
          # 'scale_pos_weight' : [1]
          # 'learning_rate':[0.01]
          }
@@ -581,12 +581,12 @@ def main(args):
     #     'scale_pos_weight':1
     # }
     #
-    # tmp = time.time()
-    # best_params, num_round = get_xgboost_params(X,Y)
-    # boost_time = time.time() - tmp
-    # logger.info("get xgboost best params Time {}".format(str(boost_time)))
-    # best_params['num_round'] = num_round
-    # best_params['eval_metric']= ['auc', 'map', 'error']
+    tmp = time.time()
+    best_params, num_round = get_xgboost_params(X,Y)
+    boost_time = time.time() - tmp
+    logger.info("get xgboost best params Time {}".format(str(boost_time)))
+    best_params['num_round'] = num_round
+    best_params['eval_metric']= ['auc', 'map', 'error']
 
     # best_params={
     #     'silent': 1,
@@ -604,20 +604,20 @@ def main(args):
     # }
     # num_round = 798
 
-    best_params={
-        'silent': 1,
-        'eval_metric': ['error','auc','map'],
-        'tree_method': 'gpu_hist',
-        'objective': 'binary:logistic',
-        'num_round': 877,
-        'max_depth': 17,
-        'min_child_weight': 5,
-        'gamma': 0,
-        'subsample': 0.8,
-        'colsample_bytree': 0.9,
-        'reg_alpha': 0.1
-    }
-    num_round = 798
+    # best_params={
+    #     'silent': 1,
+    #     'eval_metric': ['error','auc','map'],
+    #     'tree_method': 'gpu_hist',
+    #     'objective': 'binary:logistic',
+    #     'num_round': 877,
+    #     'max_depth': 13,
+    #     'min_child_weight': 5,
+    #     'gamma': 0,
+    #     'subsample': 0.8,
+    #     'colsample_bytree': 0.9,
+    #     'reg_alpha': 0.1
+    # }
+    # num_round = 500
 
     for i, (train, test) in enumerate(cv.split(X, Y)):
         dtrain = xgb.DMatrix(X[train], label=Y[train])
@@ -625,11 +625,14 @@ def main(args):
         bst = xgb.train(best_params, dtrain, num_round)
         boost_time = time.time() - tmp
         res = bst.eval(xgb.DMatrix(X[test], label=Y[test]))
-        logger.info("Fold {}: {}, F1-score: %.6f Boost Time {}".format(i, res, str(boost_time)))
+        logger.info("Fold {}: {}, Boost Time {}".format(i, res, str(boost_time)))
         test_y = Y[test]
         predicted_results = bst.predict(xgb.DMatrix(X[test], label=Y[test]))
         y_pred = (predicted_results >= 0.5) * 1
         logger.info('F1-score: %.4f' % metrics.f1_score(test_y, y_pred))
+        logger.info('Recall: %.4f' % metrics.recall_score(test_y, y_pred))
+        logger.info('Precesion: %.4f' % metrics.precision_score(test_y, y_pred))
+        logger.info('ACC: %.4f' % metrics.accuracy_score(test_y, y_pred))
         del bst
 
     # gpu_res = {}
@@ -661,11 +664,11 @@ def parameter_parser():
     parser.add_argument("--input-json-path",
                         nargs="?",
                         # default="/Users/chengxiao/Desktop/VulDeepecker/资料/project/CGDSymbolization/src/main/resources/result",
-                        default="/home/cry/chengxiao/dataset/SARD.2019-02-28-22-07-31/noerror/result_sym",
+                        default="/home/cry/chengxiao/dataset/SARD.2019-02-28-22-07-31/noerror/cut/result_sym",
                         help="Input folder with jsons.")
     parser.add_argument("--input-csv-path",
                         nargs="?",
-                        default="../features/test-787-noerror.csv",
+                        default="../features/test-787-cut.csv",
                         help="Input csv file which contains graphvecs.")
     parser.add_argument("--epochs",
                         type=int,

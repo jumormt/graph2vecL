@@ -71,7 +71,9 @@ def dataset_reader(path):
     """
     name = path.strip(".json").split("/")[-1]
     data = json.load(open(path, encoding="utf8"))
-    graph = nx.from_edgelist(data["edges"])
+    graph = nx.DiGraph()
+    graph.add_edges_from(data["edges"])
+    # graph = nx.from_edgelist(data["edges"])
 
     if "features" in data.keys():
         features = data["features"]
@@ -120,8 +122,8 @@ def main(args):
     :param args: Object with the arguments.
     """
     # args.input_path = u"/Users/chengxiao/Downloads/graph2vec-master/dataset_test/"
-    args.input_path = u"/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/noerror/result_sym_pre/"
-    args.output_path = u"/Users/chengxiao/Downloads/graph2vec-master/features/test-787-noerror.csv"
+    args.input_path = u"/Users/chengxiao/Downloads/SARD.2019-02-28-22-07-31/noerror/cut/result_sym_pre/"
+    args.output_path = u"/Users/chengxiao/Downloads/graph2vec-master/features/test-787-cut.csv"
     graphs = glob.glob(args.input_path + "*.json")
     print("\nFeature extraction started.\n")
     document_collections = Parallel(n_jobs = args.workers)(delayed(feature_extractor)(g, args.wl_iterations) for g in tqdm(graphs))
